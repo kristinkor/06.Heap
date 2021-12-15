@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=heap-facade.jar -DgroupId=com.jbbwebsolutions.datastructure -DartifactId=heap -Dversion=1.3 -Dpackaging=jar
