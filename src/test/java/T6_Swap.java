@@ -26,7 +26,28 @@ public class T6_Swap {
         minHeap.insertBiConsumer((e1, e2) -> {
             System.out.println(e1 + " | " + e2);
         });
-        minHeap.inserts(44,100,200,150,35);
+        minHeap.inserts(44,100,200,150,35,17,222);
+        System.out.println("test");
+    }
+    @Test
+    @DisplayName("T01 swap 44 and 100")
+    public void swap03() {
+        IHeap maxHeap = new MaxHeap();
+        maxHeap.insertBiConsumer((e1, e2) -> {
+            System.out.println(e1 + " | " + e2);
+        });
+        maxHeap.inserts(5,12,64,1,37,90,91,97);
+        System.out.println("test");
+    }
+
+    @Test
+    @DisplayName("T01 swap 44 and 100")
+    public void swap04() {
+        IHeap minHeap = new MinHeap();
+        minHeap.insertBiConsumer((e1, e2) -> {
+            System.out.println(e1 + " | " + e2);
+        });
+        minHeap.inserts(5,12,64,1,37,90,91,97);
         System.out.println("test");
     }
 }

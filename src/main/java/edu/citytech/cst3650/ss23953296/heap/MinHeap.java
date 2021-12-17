@@ -97,7 +97,7 @@ public class MinHeap implements IHeap {
 
     @Override
     public String toString() {
-        return "MaxHeap{" +
+        return "MinHeap{" +
                 "items=" + Arrays.toString(items) +
                 ", size=" + size +
                 '}';

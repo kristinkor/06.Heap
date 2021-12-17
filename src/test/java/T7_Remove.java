@@ -4,7 +4,7 @@ import edu.citytech.cst3650.ss23953296.heap.MaxHeap;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Get parent Value")
+@DisplayName("Remove")
 public class T7_Remove {
     @Test
     @DisplayName("T7 Remove the first")

@@ -1,12 +1,17 @@
 package edu.citytech.cst3650.ss23953296.heap;
 
+import com.jbbwebsolutions.datastructure.EnumComparison;
 import com.jbbwebsolutions.datastructure.IHeap;
+import com.jbbwebsolutions.datastructure.IHeapQuery;
 import com.jbbwebsolutions.datastructure.Twin;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
-public class MaxHeap implements IHeap {
+public class MaxHeap implements IHeap, IHeapQuery {
     private int[] items = new int[10];
     private int size = 0;
     private BiConsumer<Twin<Integer, Integer>, Twin<Integer, Integer>> biConsumer = (e1, e2) -> {
@@ -135,4 +140,74 @@ public class MaxHeap implements IHeap {
                 ", size=" + size +
                 '}';
     }
+    @Override
+    public List<Integer> find(Predicate<EnumComparison> predicate, int value, BiConsumer<Twin<Integer, Integer>, Twin<Integer, Integer>> biConsumer) {
+        boolean greaterThan = predicate.test(EnumComparison.GREATER_THAN);
+        boolean equalTo = predicate.test(EnumComparison.EQUAL);
+        boolean lessThan = predicate.test(EnumComparison.LESS_THAN);
+        boolean minElem = predicate.test(EnumComparison.MIN);
+        boolean maxElem = predicate.test(EnumComparison.MAX);
+        List<Integer> result = new ArrayList<>();
+
+
+        if (greaterThan) {
+            int index = 0;
+            result.add(greaterThan(index, getParent(0), value, biConsumer));
+            return result;
+        }
+        if (equalTo) {
+            int index = 0;
+            result.add(equalTo(index, getParent(0), value, biConsumer));
+            return result;
+        }
+        if (lessThan) {
+            int index = -1;
+            result.add(lessThan(index, getParent(0), value, biConsumer));
+            return result;
+        }
+        if (minElem) {
+        }
+        return result;
+    }
+
+    private int greaterThan(int index, int currentValue, int value, BiConsumer<Twin<Integer, Integer>, Twin<Integer, Integer>> biConsumer) {
+
+        if (currentValue < value) {
+
+            return greaterThan(index, getRightChild(index), value, biConsumer);
+        }
+        if (currentValue > value) {
+
+            return greaterThan(index, getLeftChild(index), value, biConsumer);
+        }
+        return 0;
+    }
+
+    private Integer equalTo(int index, int currentValue, int value, BiConsumer<Twin<Integer, Integer>, Twin<Integer, Integer>> biConsumer) {
+        Twin<Integer, Integer> pair1 = new Twin<Integer, Integer>(index, getParent(index));
+        Twin<Integer, Integer> pair2 = new Twin<Integer, Integer>(index, items[index]);
+        biConsumer.accept(pair1, pair2);
+        index ++;
+        System.out.println(index);
+        System.out.println(currentValue);
+        System.out.println("---------");
+        if (currentValue == value) {
+            return value;
+        }
+        if (value > currentValue) {
+            return equalTo(index, getRightChild(index), value, biConsumer);
+        }
+
+        return equalTo(index, getLeftChild(index), value, biConsumer);
+    }
+
+
+    private int lessThan(int index, int currentValue, int value, BiConsumer<Twin<Integer, Integer>, Twin<Integer, Integer>> biConsumer) {
+        if (currentValue == value) {
+            return lessThan(index, getLeftChild(index), value, biConsumer);
+        }
+        return 0;
+
+    }
+
 }
