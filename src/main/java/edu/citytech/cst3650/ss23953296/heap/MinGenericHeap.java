@@ -1,14 +1,23 @@
 package edu.citytech.cst3650.ss23953296.heap;
 
 import com.jbbwebsolutions.datastructure.IGenericHeap;
+import com.jbbwebsolutions.datastructure.IGenericHeapQuery;
 import com.jbbwebsolutions.datastructure.IHeap;
 import com.jbbwebsolutions.datastructure.Twin;
 
+import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
-public class MinGenericHeap <T extends Comparable<T>> implements IGenericHeap<T> {
+public class MinGenericHeap <T extends Comparable<T>> implements IGenericHeap<T> , IGenericHeapQuery {
 
     private final Object[] items = new Object[10];
+
+    @Override
+    public List find(Predicate predicate, Comparable value, BiConsumer biConsumer) {
+        return IGenericHeapQuery.super.find(predicate, value, biConsumer);
+    }
+
     private int size = 0;
     private BiConsumer<Twin<Integer, T>, Twin<Integer, T>> biConsumer = (e1, e2) -> {
     };

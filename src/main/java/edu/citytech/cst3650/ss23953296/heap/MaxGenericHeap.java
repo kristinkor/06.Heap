@@ -119,6 +119,11 @@ public class MaxGenericHeap<T extends Comparable<T>> implements IGenericHeap<T>,
         this.biConsumer = biConsumer;
     }
 
+    @Override
+    public List<T> find(Predicate<EnumComparison> predicate, T value, BiConsumer<Twin<Integer, T>, Twin<Integer, T>> biConsumer) {
+        return IGenericHeapQuery.super.find(predicate, value, biConsumer);
+    }
+
 //    @Override
 //    public List<T> find(Predicate<EnumComparison> predicate, T value, BiConsumer<Twin<Integer, T>, Twin<Integer, T>> biConsumer) {
 //        int rootIndex = heap.getParentIndex();  // to implement
